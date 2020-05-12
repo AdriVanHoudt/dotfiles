@@ -55,8 +55,11 @@ brew install p7zip
 brew install ssh-copy-id
 brew install tree
 
+# better terminal
+brew install iterm2
 # node version manager
 brew install n
+# lts version of node
 n lts
 # Androind builder
 brew install gradle
