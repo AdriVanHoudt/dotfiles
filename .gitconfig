@@ -3,8 +3,8 @@
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
-	# View the current working tree status using the short format
-	s = status -s
+	# View the current working tree status using the long format
+	s = status --long
 
 	# Show the diff between the latest commit and the current state
 	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
@@ -12,14 +12,32 @@
 	# `git di $number` shows the diff between the state `$number` revisions ago and the current state
 	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
 
-	# Pull in remote changes for the current repository and all its submodules
-	p = pull --recurse-submodules
+	# Pull in remote changes for the current repository and rebase not merge
+	pl = pull --rebase=merges
+
+	# Pull PR into a new branch
+	plpr = !"plpr() { git fetch origin pull/$1/head:$1 && git checkout $1; }; plpr"
+
+	# Push
+	pu = push -v
+
+	# force push
+	puf = pu --force-with-lease
+
+	# Push new branch with auto —set-upstream
+	pub = "!pub() { git pu -u origin $(git rev-parse --abbrev-ref HEAD); }; pub"
 
 	# Clone a repository including all submodules
 	c = clone --recursive
 
+	# Checkout
+	co = checkout
+
 	# Commit all changes
-	ca = !git add -A && git commit -av
+	cma = !git add -A && git commit -av
+
+	# Cherry pick
+	chp = "!r() { git cherry-pick -x $1; }; r"
 
 	# Switch to a branch, creating it if necessary
 	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
@@ -105,6 +123,7 @@
 	# Prevent showing files whose names contain non-ASCII symbols as unversioned.
 	# http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
 	precomposeunicode = false
+	editor = vim
 
 	# Speed up commands involving untracked files such as `git status`.
 	# https://git-scm.com/docs/git-update-index#_untracked_cache
@@ -128,6 +147,7 @@
 	frag = magenta bold # line info
 	old = red # deletions
 	new = green # additions
+	whitespace = red reverse
 
 [color "status"]
 
@@ -144,6 +164,11 @@
 
 	# Detect copies as well as renames
 	renames = copies
+
+	# (git 2.9+) Set this option to `true` to enable an experimental heuristic that
+	# shifts the chunk boundary in an attempt to make the resulting
+	# patch easier to read.
+	indentHeuristic = true
 
 [diff "bin"]
 
@@ -188,3 +213,23 @@
 [url "git://gist.github.com/"]
 
 	insteadOf = "gist:"
+
+[user]
+	name = Adri Van Houdt
+	email = adri.van.houdt@gmail.com
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+	process = git-lfs filter-process
+[gc]
+	auto = 1
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
+[fetch]
+	prune = true
+[merge "npm-merge-driver"]
+	name = automatically merge npm lockfiles
+	driver = npx npm-merge-driver merge %A %O %B %P
