@@ -56,7 +56,7 @@ brew install ssh-copy-id
 brew install tree
 
 # better terminal
-brew install iterm2
+brew cask install iterm2
 # node version manager
 brew install n
 # lts version of node
