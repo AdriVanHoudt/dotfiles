@@ -67,6 +67,8 @@ brew install percona-toolkit
 brew install wifi-password
 # Screensaver
 brew cask install aerial
+# Visual studio code IDE
+brew cask install visual-studio-code
 
 # Remove outdated versions from the cellar.
 brew cleanup
