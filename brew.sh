@@ -38,6 +38,9 @@ brew install wget
 # Install GnuPG to enable PGP-signing commits.
 brew install gnupg
 
+# Install gpg keychain link
+brew install pinentry-mac
+
 # Install more recent versions of some macOS tools.
 brew install vim
 brew install grep
@@ -69,6 +72,8 @@ brew install wifi-password
 brew cask install aerial
 # Visual studio code IDE
 brew cask install visual-studio-code
+# shell script checker
+brew install shellcheck
 
 # Remove outdated versions from the cellar.
 brew cleanup
