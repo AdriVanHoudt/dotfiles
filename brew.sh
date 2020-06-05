@@ -62,6 +62,8 @@ brew install tree
 brew cask install iterm2
 # Androind builder
 brew install gradle
+# ios dependency tool
+brew install cocoapods
 # Fun tool to see what you did
 brew install git-standup
 # SQL tools for migrations
