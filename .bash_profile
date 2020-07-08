@@ -1,11 +1,12 @@
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
 
-# Export android home
+# Export android and java home
 export ANDROID_HOME=~/Library/Android/sdk;
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
 
-# Add android home to path
-export PATH="$ANDROID_HOME:$ANDROID_HOME/build-tools/29.0.2:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH";
+# Add android and java home to path
+export PATH="$ANDROID_HOME:$ANDROID_HOME/build-tools/29.0.2:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$JAVA_HOME:$PATH";
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
