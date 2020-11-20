@@ -76,6 +76,8 @@ brew cask install aerial
 brew cask install visual-studio-code
 # shell script checker
 brew install shellcheck
+# file archiver
+brew install keka
 
 # Remove outdated versions from the cellar.
 brew cleanup
